@@ -1,5 +1,7 @@
+import axios from "axios";
 import React from "react";
 import { FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { Flip, toast } from "react-toastify";
 
 function SignUpForm() {
   const [state, setState] = React.useState({
@@ -19,9 +21,39 @@ function SignUpForm() {
     evt.preventDefault();
 
     const { name, email, password } = state;
-    alert(
-      `You are sign up with name: ${name} email: ${email} and password: ${password}`
-    );
+
+    axios
+      .post("http://localhost:5000/signup", {
+        username: name,
+        password: password,
+        email: email,
+      })
+      .then((data) => {
+        toast.success(data?.message ?? "Sucessfully logedIn", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Flip,
+        });
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message ?? "Error", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Flip,
+        });
+      });
 
     for (const key in state) {
       setState({

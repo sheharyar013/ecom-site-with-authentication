@@ -13,10 +13,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-const users = [
-  { username: "admin", password: "admin123" },
-  { username: "user2", password: "password2" },
-];
+const users = [{ username: "admin", password: "admin123" }];
 
 app.use(bodyParser.json());
 
@@ -32,6 +29,39 @@ app.post("/login", (req, res) => {
   } else {
     res.status(401).json({ message: "Invalid credentials" });
   }
+});
+
+app.post("/signup", (req, res) => {
+  const { username, email, password } = req.body;
+
+  const existUser = users.find(
+    (user) => user.name === username || user.email === email
+  );
+
+  if (existUser) {
+    return res.status(400).json({
+      message: "Username is already exist!",
+    });
+  }
+
+  const user = {
+    username,
+    email,
+    password,
+  };
+
+  users.push(user);
+
+  res.status(200).json({
+    message: "User is created successfully!",
+    user,
+  });
+});
+
+app.use("/users", (_, res) => {
+  res.status(200).json({
+    users,
+  });
 });
 
 app.listen(PORT, () => {
