@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Flip, toast } from "react-toastify";
+import { FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 function SignInForm() {
   const [state, setState] = React.useState({
@@ -41,7 +42,6 @@ function SignInForm() {
         console.log(data, "res dataa");
       })
       .catch((error) => {
-        console.error(error);
         toast.error(error?.response?.data?.message ?? "Error", {
           position: "top-right",
           autoClose: 2000,
@@ -69,13 +69,13 @@ function SignInForm() {
         <h1>Sign in</h1>
         <div className="social-container">
           <a href="/" className="social">
-            <i className="fab fa-facebook-f" />
+            <FaFacebook />
           </a>
           <a href="/" className="social">
-            <i className="fab fa-google-plus-g" />
+            <FaGoogle />
           </a>
           <a href="/" className="social">
-            <i className="fab fa-linkedin-in" />
+            <FaLinkedin />
           </a>
         </div>
         <span>or use your account</span>

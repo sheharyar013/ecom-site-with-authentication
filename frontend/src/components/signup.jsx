@@ -1,4 +1,6 @@
 import React from "react";
+import { FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
+
 function SignUpForm() {
   const [state, setState] = React.useState({
     name: "",
@@ -34,14 +36,14 @@ function SignUpForm() {
       <form onSubmit={handleOnSubmit}>
         <h1>Create Account</h1>
         <div className="social-container">
-          <a href="#" className="social">
-            <i className="fab fa-facebook-f" />
+          <a href="/" className="social">
+            <FaFacebook />
           </a>
-          <a href="#" className="social">
-            <i className="fab fa-google-plus-g" />
+          <a href="/" className="social">
+            <FaGoogle />
           </a>
-          <a href="#" className="social">
-            <i className="fab fa-linkedin-in" />
+          <a href="/" className="social">
+            <FaLinkedin />
           </a>
         </div>
         <span>or use your email for registration</span>
