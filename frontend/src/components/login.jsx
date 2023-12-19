@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Flip, toast } from "react-toastify";
 import { FaGoogle, FaFacebook, FaLinkedin } from "react-icons/fa";
 
 function SignInForm() {
+  let naviagte = useNavigate();
   const [state, setState] = React.useState({
     username: "",
     password: "",
@@ -39,7 +41,7 @@ function SignInForm() {
           theme: "dark",
           transition: Flip,
         });
-        console.log(data, "res dataa");
+        naviagte("/users");
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message ?? "Error", {
